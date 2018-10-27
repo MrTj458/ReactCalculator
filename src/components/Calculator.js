@@ -3,15 +3,15 @@ import {
 	Header,
 	Grid,
 	Button,
-	Segment,
 	Container,
+	Input,
 } from 'semantic-ui-react'
 
 class Calculator extends React.Component {
 	state = { display: '' }
 
 	addNum = (num) => {
-		if(this.state.display.length < 25) {
+		if(this.state.display.length < 20) {
 			this.setState( state => ({ display: state.display + num }) )
 		}
 	}
@@ -27,7 +27,6 @@ class Calculator extends React.Component {
 	calculate = () => {
 		let equ = this.state.display.toString()
 		equ = equ.replace(/\^/g, '**').replace(/x+/g, '*')
-		console.log(equ)
 
 		try {
 			const answer = eval(equ)
@@ -42,13 +41,16 @@ class Calculator extends React.Component {
 		return (
 			<Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 				<Header as="h1" textAlign="center">Calculator</Header>
-					<Grid style={{ width: '30vw', backgroundColor: 'darkgray'}} celled centered>
+					<Grid style={{ width: '30vw', backgroundColor: 'darkgray' }} celled centered>
 						{/* ROW 1 */}
 						<Grid.Row>
 							<Grid.Column width={16}>
-								<Segment>
-									<Header style={{ height: '25px' }} as="h2">{display}</Header>
-								</Segment>
+								<Input 
+									value={display}
+									disabled
+									fluid
+									style={{ fontSize: '25px' }}
+								/>
 							</Grid.Column>
 						</Grid.Row>
 
